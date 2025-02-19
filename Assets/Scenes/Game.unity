@@ -17770,6 +17770,7 @@ GameObject:
   - component: {fileID: 574106968}
   - component: {fileID: 574106967}
   - component: {fileID: 574106970}
+  - component: {fileID: 574106971}
   m_Layer: 0
   m_Name: Nosferatu
   m_TagString: Untagged
@@ -17984,6 +17985,21 @@ PolygonCollider2D:
       - {x: 0.865, y: -1.615}
       - {x: 0.85499996, y: -1.5749999}
   m_UseDelaunayMesh: 0
+--- !u!114 &574106971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574106966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc764b4e2c834ab5b578bf3947f447f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 5280221442889694239, guid: af29fd72e26744610aeb4b32e92e76e3,
+    type: 3}
+  delayToAttack: 1
 --- !u!1001 &580033490
 PrefabInstance:
   m_ObjectHideFlags: 0
