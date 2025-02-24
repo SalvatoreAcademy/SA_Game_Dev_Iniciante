@@ -101,6 +101,28 @@ public class NosferatuController : MonoBehaviour
         Instantiate(fireballPrefab, playerPosition, rotation);
     }
 
+    // OnTriggerEnter2D é chamado por todos os Collider2D que estiverem marcados como `IsTrigger`
+    // e tocaram o Rigidbody/Collider2D do GameObject em questão (no caso, PlayerController)
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        // Caso o Collider2D (Trigger) detectado possua a Tag "Fireball"
+        if (coll.CompareTag("Fireball"))
+        {
+            // Pegamos o script FireballController que está no mesmo GameObject da variável `coll`
+            var fireballScript = coll.GetComponent<FireballController>();
+
+            // Checamos se a Fireball foi criada pelo Player
+            // if (fireballScript.isFromPlayer == true) {
+            if (fireballScript.isFromPlayer) {
+                // Destruir o GameObject do Nosferatu
+                Destroy(gameObject);
+
+                // Destruir a Fireball
+                Destroy(coll.gameObject);
+            }
+        }
+    }
+
     void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.name == "Nosferatu Area")

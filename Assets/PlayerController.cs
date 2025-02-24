@@ -71,6 +71,9 @@ public class PlayerController : MonoBehaviour
                 // Destruir o GameObject do jogador
                 Destroy(gameObject);
 
+                // Destruir a Fireball
+                Destroy(coll.gameObject);
+
                 // Reiniciar a cena atual
                 SceneManager.LoadScene(0);
             }
