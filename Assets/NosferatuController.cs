@@ -16,11 +16,21 @@ public class NosferatuController : MonoBehaviour
     public float intervalRandomDirection = 4f;
     public float speed = 2f;
 
+    // TODO: Temos que ter um modo de Patrulha ou de Perseguição
+
+    private bool isPlayerOnSight = false;
+
+    private GameObject player;
+
+    public float distanceToSeePlayer = 6f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // Pegamos o componente do tipo Rigidbody2D que está no GameObject do Nosferatu
         rb = GetComponent<Rigidbody2D>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
 
         // Executará o método "Shoot" uma vez a cada delayToAttack segundos
         InvokeRepeating(nameof(Shoot), 0, delayToAttack);
@@ -32,6 +42,26 @@ public class NosferatuController : MonoBehaviour
     void Update()
     {
         Move();
+
+        UpdateIsPlayerOnSight();
+    }
+
+    void UpdateIsPlayerOnSight()
+    {
+        var playerPosition = player.transform.position;
+        var nosferatuPosition = transform.position;
+        var playerDistance = Vector3.Distance(playerPosition, nosferatuPosition);
+
+        if (playerDistance <= distanceToSeePlayer)
+        {
+            isPlayerOnSight = true;
+        }
+        else
+        {
+            isPlayerOnSight = false;
+        }
+        // DICA: If/Else poderia ser removido e substituído pela linha a seguir
+        // isPlayerOnSight = playerDistance <= distanceToSeePlayer;
     }
 
     void SetRandomDirection()
@@ -44,8 +74,6 @@ public class NosferatuController : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(dirX * speed, dirY * speed);
     }
-
-    // TODO: Saiu da Area, quero identificar e inverter a direção
 
     private void Shoot()
     {
