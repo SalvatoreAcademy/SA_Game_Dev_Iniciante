@@ -55,4 +55,13 @@ public class NosferatuController : MonoBehaviour
         var rotation = Quaternion.identity;
         Instantiate(fireballPrefab, playerPosition, rotation);
     }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.name == "Nosferatu Area")
+        {
+            dirX *= -1;
+            dirY *= -1;
+        }
+    }
 }

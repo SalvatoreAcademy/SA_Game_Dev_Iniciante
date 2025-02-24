@@ -18001,6 +18001,8 @@ MonoBehaviour:
   fireballPrefab: {fileID: 5280221442889694239, guid: af29fd72e26744610aeb4b32e92e76e3,
     type: 3}
   delayToAttack: 1
+  intervalRandomDirection: 4
+  speed: 2
 --- !u!50 &574106972
 Rigidbody2D:
   serializedVersion: 5
@@ -18027,7 +18029,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1001 &580033490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24455,17 +24457,19 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 5.1898575, y: 3.8391666}
+    - - {x: 3.6299438, y: 3.0208511}
       - {x: 2.795456, y: 4.548072}
-      - {x: 1.4628525, y: 6.1311235}
+      - {x: 1.2326965, y: 4.980367}
       - {x: -1.5155249, y: 4.6097107}
-      - {x: -4.012863, y: 3.037982}
+      - {x: -3.0666885, y: 1.9639425}
       - {x: -5.4260726, y: -0.9702929}
-      - {x: -3.109024, y: -3.5412598}
-      - {x: -3.2022004, y: -6.856867}
-      - {x: 2.07518, y: -5.547743}
-      - {x: 5.5055923, y: -1.9848661}
-      - {x: 5.332389, y: 1.5454674}
+      - {x: -4.592224, y: -4.027134}
+      - {x: -2.486174, y: -5.1690903}
+      - {x: -0.2542038, y: -5.25836}
+      - {x: 1.0011368, y: -4.0645466}
+      - {x: 2.1181564, y: -1.5318193}
+      - {x: 3.792244, y: -1.1409769}
+      - {x: 4.3862143, y: 1.1618824}
   m_UseDelaunayMesh: 0
 --- !u!4 &739497746
 Transform:
