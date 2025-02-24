@@ -1,5 +1,6 @@
 using Cainos.PixelArtTopDown_Basic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -49,6 +50,30 @@ public class PlayerController : MonoBehaviour
 
         // eulerAngles (x, y e z - 0º a 360º)
         // Quaternion (x, y, z e w)
-        Instantiate(fireballPrefab, playerPosition, Quaternion.Euler(0, 0, rotationZ));
+        var fireball = Instantiate(fireballPrefab, playerPosition, Quaternion.Euler(0, 0, rotationZ));
+        var fireballScript = fireball.GetComponent<FireballController>();
+        fireballScript.isFromPlayer = true;
+    }
+
+    // OnTriggerEnter2D é chamado por todos os Collider2D que estiverem marcados como `IsTrigger`
+    // e tocaram o Rigidbody/Collider2D do GameObject em questão (no caso, PlayerController)
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        // Caso o Collider2D (Trigger) detectado possua a Tag "Fireball"
+        if (coll.CompareTag("Fireball"))
+        {
+            // Pegamos o script FireballController que está no mesmo GameObject da variável `coll`
+            var fireballScript = coll.GetComponent<FireballController>();
+
+            // Checamos se a Fireball não foi criada pelo Player
+            // if (fireballScript.isFromPlayer == false) {
+            if (!fireballScript.isFromPlayer) {
+                // Destruir o GameObject do jogador
+                Destroy(gameObject);
+
+                // Reiniciar a cena atual
+                SceneManager.LoadScene(0);
+            }
+        }
     }
 }
