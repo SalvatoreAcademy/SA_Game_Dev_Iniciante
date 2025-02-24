@@ -72,7 +72,24 @@ public class NosferatuController : MonoBehaviour
 
     void Move()
     {
-        rb.linearVelocity = new Vector2(dirX * speed, dirY * speed);
+        float directionX = dirX;
+        float directionY = dirY;
+
+        if (isPlayerOnSight)
+        {
+            // Direção do movimento para seguir o jogador, deve ser calculada da seguinte maneira:
+            // (Posição do Player - Posição do Nosferatu)
+            // Quando subtraímos dois vetores, o resultado é a direção + a intensidade (também é conhecido como magnitude)
+            // Para pegar esse resultado e extrair apenas a direção, vamos usar a declaração `normalized` (magnitude = 1)
+            var playerPosition = player.transform.position;
+            var nosferatuPosition = transform.position;
+
+            var playerDirection = (playerPosition - nosferatuPosition).normalized;
+            directionX = playerDirection.x;
+            directionY = playerDirection.y;
+        }
+
+        rb.linearVelocity = new Vector2(directionX * speed, directionY * speed);
     }
 
     private void Shoot()
