@@ -6,12 +6,15 @@ public class NosferatuController : MonoBehaviour
     public GameObject fireballPrefab;
 
     // Tempo entre cada ataque
-    public float delayToAttack = 1;
+    public float delayToAttack = 1f;
 
     private Rigidbody2D rb;
 
-    private int dirX = -1;
-    private int dirY = 0;
+    private float directionX = 0f;
+    private float directionY = 0f;
+
+    private int randomDirectionX = -1;
+    private int randomDirectionY = 0;
 
     public float intervalRandomDirection = 4f;
     public float speed = 2f;
@@ -24,11 +27,16 @@ public class NosferatuController : MonoBehaviour
 
     public float distanceToSeePlayer = 6f;
 
+    private SpriteRenderer spriteRenderer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // Pegamos o componente do tipo Rigidbody2D que está no GameObject do Nosferatu
         rb = GetComponent<Rigidbody2D>();
+
+        // Pegamos o componente do tipo SpriteRenderer que está no GameObject do Nosferatu
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -44,6 +52,13 @@ public class NosferatuController : MonoBehaviour
         Move();
 
         UpdateIsPlayerOnSight();
+
+        UpdateSprite();
+    }
+
+    void UpdateSprite()
+    {
+        spriteRenderer.flipX = directionX > 0f;
     }
 
     void UpdateIsPlayerOnSight()
@@ -66,14 +81,14 @@ public class NosferatuController : MonoBehaviour
 
     void SetRandomDirection()
     {
-        dirX = Random.Range(-1, 2);
-        dirY = Random.Range(-1, 2);
+        randomDirectionX = Random.Range(-1, 2);
+        randomDirectionY = Random.Range(-1, 2);
     }
 
     void Move()
     {
-        float directionX = dirX;
-        float directionY = dirY;
+        directionX = randomDirectionX;
+        directionY = randomDirectionY;
 
         if (isPlayerOnSight)
         {
@@ -127,8 +142,8 @@ public class NosferatuController : MonoBehaviour
     {
         if (coll.name == "Nosferatu Area")
         {
-            dirX *= -1;
-            dirY *= -1;
+            randomDirectionX *= -1;
+            randomDirectionY *= -1;
         }
     }
 }
