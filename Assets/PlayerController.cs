@@ -55,6 +55,17 @@ public class PlayerController : MonoBehaviour
         fireballScript.isFromPlayer = true;
     }
 
+    // Se algum inimigo tocar no Player, destrói o Player e reinicia a cena
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+
+            SceneManager.LoadScene(0);
+        }
+    }
+
     // OnTriggerEnter2D é chamado por todos os Collider2D que estiverem marcados como `IsTrigger`
     // e tocaram o Rigidbody/Collider2D do GameObject em questão (no caso, PlayerController)
     void OnTriggerEnter2D(Collider2D coll)

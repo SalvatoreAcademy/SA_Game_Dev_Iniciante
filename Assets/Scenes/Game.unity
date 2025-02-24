@@ -17774,7 +17774,7 @@ GameObject:
   - component: {fileID: 574106972}
   m_Layer: 0
   m_Name: Nosferatu
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18003,6 +18003,7 @@ MonoBehaviour:
   delayToAttack: 1
   intervalRandomDirection: 4
   speed: 2
+  distanceToSeePlayer: 6
 --- !u!50 &574106972
 Rigidbody2D:
   serializedVersion: 5
