@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using Cainos.PixelArtTopDown_Basic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +10,11 @@ public class PlayerController : MonoBehaviour
 
     public GameObject gameOverCanvas;
 
+    public GameObject victoryCanvas;
+
     private bool isDead;
+
+    private bool isWinner;
 
     private Rigidbody2D rb;
 
@@ -33,8 +36,9 @@ public class PlayerController : MonoBehaviour
             Shoot();
         }
 
-        // Caso o jogador esteja morto (isDead = true) e o usuário apertou Z, reinicia a cena
-        if (isDead && Input.GetKeyDown(KeyCode.Z))
+        // Caso o jogador esteja morto (isDead = true) ou é vencedor (isWinner = true)
+        // e o usuário apertou Z, reinicia a cena
+        if ((isDead || isWinner) && Input.GetKeyDown(KeyCode.Z))
         {            
             SceneManager.LoadScene(0);
         }
@@ -68,6 +72,13 @@ public class PlayerController : MonoBehaviour
         var fireball = Instantiate(fireballPrefab, playerPosition, Quaternion.Euler(0, 0, rotationZ));
         var fireballScript = fireball.GetComponent<FireballController>();
         fireballScript.isFromPlayer = true;
+    }
+
+    public void Win()
+    {
+        isWinner = true;
+
+        victoryCanvas.SetActive(true);
     }
 
     // Se algum inimigo tocar no Player, destrói o Player e reinicia a cena

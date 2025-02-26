@@ -134,6 +134,9 @@ public class NosferatuController : MonoBehaviour
 
                 // Destruir a Fireball
                 Destroy(coll.gameObject);
+
+                var playerScript = player.GetComponent<PlayerController>();
+                playerScript.Win();
             }
         }
     }
