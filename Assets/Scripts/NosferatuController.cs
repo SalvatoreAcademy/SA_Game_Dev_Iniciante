@@ -109,6 +109,11 @@ public class NosferatuController : MonoBehaviour
 
     private void Shoot()
     {
+        if (!isPlayerOnSight)
+        {
+            return;
+        }
+
         // Precisamos do Prefab da Fireball
         // Vamos pegar o Prefab da Fireball e criar uma cópia na mesma posição do jogador
         var playerPosition = transform.position;
