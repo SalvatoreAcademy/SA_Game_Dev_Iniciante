@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Cainos.PixelArtTopDown_Basic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,10 +9,18 @@ public class PlayerController : MonoBehaviour
 
     private TopDownCharacterController topDownCharacterController;
 
+    public GameObject gameOverCanvas;
+
+    private bool isDead;
+
+    private Rigidbody2D rb;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         topDownCharacterController = GetComponent<TopDownCharacterController>();
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -22,6 +31,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
+        }
+
+        // Caso o jogador esteja morto (isDead = true) e o usuário apertou Z, reinicia a cena
+        if (isDead && Input.GetKeyDown(KeyCode.Z))
+        {            
+            SceneManager.LoadScene(0);
         }
     }
 
@@ -60,9 +75,14 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            // Define o valor de isDead como true, para saber que o jogador morreu
+            isDead = true;
 
-            SceneManager.LoadScene(0);
+            // Desativar o Rigidbody do Player
+            rb.simulated = false;
+
+            // Exibe o GameOver Canvas
+            gameOverCanvas.SetActive(true);
         }
     }
 
